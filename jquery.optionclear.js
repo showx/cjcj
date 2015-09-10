@@ -1,5 +1,7 @@
 /**
 * jquery option选择
+* input搜索值，查找出select中的值
+* version 1.0
 * date:2015.09.09
 * Author:show(9448923@qq.com)
 */
@@ -12,9 +14,10 @@ $.fn.optionclear  = function (options,callback){
 		"num":"10",
 		"clearid":"",
 		"hook":"",
-		"backcolor":"#FFFAFA",
+		"backcolor":"#FFFF99",
 		"hovercolor":"#FF1493",
 		"trig":"change",
+		"width":"200px",
 	}
 	var opts = $.extend({},defaults,options || {});
 	//debug
@@ -53,10 +56,8 @@ $.fn.optionclear  = function (options,callback){
 		 })
 		hook();
 	}
-	//apply
 	function eachselect(dat)
 	{
-		// alert('haha');
 		var ht = $("#"+opts.clearid);
 		ht.each(function(){
 			$(".ocze").html("");
@@ -76,16 +77,12 @@ $.fn.optionclear  = function (options,callback){
 						i++;
 					}
 				}
-				
-				
-			})
+			});
 			if($(".ocze").html() !="" )
 			{
 				$(".getpp").bind("click",function(event){
 					 var e = $(this).attr("v");
-					 // d(e);
 					 setSelect(e);
-					 // $(".ocze").css({"display":"none"});
 					 $(".ocze").html("");
 					 
 				});
@@ -94,20 +91,67 @@ $.fn.optionclear  = function (options,callback){
 				},function(){
 					$(this).css({'background-color':opts.backcolor})
 				});
+				$("#"+opts.clearid).blur(function(e){
+					$("#"+opts.clearid).trigger("blurEvent");
+				});
 			}
 			$(".ocze").css({"display":"block"});
-		})
+
+		});
+		//主要控制键盘的上下操作就行了
+		
+	}
+	
+	_keydown = function()
+	{
+		this.e = "";
+		var keys = {
+		UP:38,
+		DOWN:40,
+		ESC:27   //返回的时候关闭窗口
+		};
+		this.chu = function(e){
+			keypress = this.e.keyCode;
+			switch(keypress)
+			{
+				case keys.UP:
+					this.e.preventDefault();
+					console.log("up");
+					break;
+				case keys.DOWN:
+					this.e.preventDefault();
+					console.log("down");
+					break;
+				case keys.ESC:
+					$(".ocze").css({"display":"none"});
+					this.e.preventDefault();
+					break;
+			}
+		}
+		
+	}
+	setE = function(e)
+	{
+		if(e)
+		{
+			this.e = e;	
+		}
+		
 	}
 	return this.each(function(){
 		var $this = $(this);
 		left = $this.position().left;
 
 		$this.after("<div class='ocze'>haha</div>");
-		$(".ocze").css({"background-color":opts.backcolor,"width":"100px","position":"absolute","display":"none"});//,"left":left+"px"
+		$(".ocze").css({"background-color":opts.backcolor,"width":opts.width,"position":"absolute","display":"none"});//,"left":left+"px"
 
-		$this.keyup(function(){
+		$this.keyup(function(e){
 			var dat = $.trim($this.val());
-			eachselect(dat);
+			eachselect.call("_keydown",dat);
+			var keydown = new _keydown();
+			var ev = new setE(e);
+			keydown.chu.apply(ev);
+
 		})
 		
 	})
@@ -115,3 +159,4 @@ $.fn.optionclear  = function (options,callback){
 	
 }
 })(jQuery)
+
