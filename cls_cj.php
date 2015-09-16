@@ -1,4 +1,12 @@
 <?php
+/*<?php
+header("Content-type: text/html; charset=utf-8");    
+include_once "cls_cj.php";
+$cj = new btget("t/xx.html"); 
+$cj->setStyleUrl("http://.com.cn");
+// $cj->cssimg("developer/css/common-v1.9.1.min.css");
+ $cj->start();
+*/
 /**
 * 采集类
 * Author:show
