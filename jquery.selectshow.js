@@ -2,7 +2,7 @@
 * jquery option选择
 * input搜索值，查找出select中的值
 * version 2.0
-* date:2015.09.09
+* date:2015.09.14
 * Author:show(9448923@qq.com)
 */
 
