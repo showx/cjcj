@@ -40,9 +40,9 @@
 			            {
 			              selected = source.find("option:first");
 			            }
-			            $(this).after("<div id='target2' style='display:inline-block;height:15px;width:"+settings.width+"'></div>");
+			            $(this).after("<div id='target"+settings.sid+"' style='display:inline-block;height:15px;width:"+settings.width+"'></div>");
 			            source.hide();  //隐藏原来的
-			            $("#target2").append('<dl id="target" class="dropdown"></dl>');
+			            $("#target"+settings.sid).append('<dl id="target" class="dropdown"></dl>');
 			            var w = parseInt(settings.width)-8+"px";
 			            $("#target").append('<dt><input style="width:'+w+'" type="text" autoComplete="Off" name="x" value="' + selected.text() + ' " />' +
 			                '<span class="value">' + selected.val() + 
@@ -153,4 +153,3 @@
 	}
 
 })(jQuery)
-

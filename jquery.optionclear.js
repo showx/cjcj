@@ -11,7 +11,7 @@ $.fn.optionclear  = function (options,callback){
 	// var method = arguments[0];
 	// console.log(method);
 	var defaults = {
-		"num":"10",
+		"num":"50",
 		"clearid":"",
 		"hook":"",
 		"backcolor":"#FFFF99",
@@ -71,6 +71,9 @@ $.fn.optionclear  = function (options,callback){
 				var val = $(this).val();
 				if(dat!="")
 				{
+					//字母转换大小写比较
+					txt = txt.toLowerCase();
+					dat = dat.toLowerCase();
 					if (txt.indexOf(dat) >=0)
 					{
 						$(".ocze").append("<p class='getpp' v='"+val+"'>"+txt+"</p>");
@@ -84,7 +87,7 @@ $.fn.optionclear  = function (options,callback){
 					 var e = $(this).attr("v");
 					 setSelect(e);
 					 $(".ocze").html("");
-					 
+					 $(".ocze").css({"display":"none"});
 				});
 				$(".getpp").hover(function(){
 					$(this).css({'background-color':opts.hovercolor,"cursor":"mouse"})
@@ -94,8 +97,11 @@ $.fn.optionclear  = function (options,callback){
 				$("#"+opts.clearid).blur(function(e){
 					$("#"+opts.clearid).trigger("blurEvent");
 				});
+				$(".ocze").css({"display":"block"});
+			}else{
+				$(".ocze").css({"display":"none"});
 			}
-			$(".ocze").css({"display":"block"});
+			
 
 		});
 		//主要控制键盘的上下操作就行了
@@ -143,7 +149,7 @@ $.fn.optionclear  = function (options,callback){
 		left = $this.position().left;
 
 		$this.after("<div class='ocze'>haha</div>");
-		$(".ocze").css({"background-color":opts.backcolor,"width":opts.width,"position":"absolute","display":"none"});//,"left":left+"px"
+		$(".ocze").css({"background-color":opts.backcolor,"width":opts.width,"position":"absolute","display":"none","height":"100px","overflow":"auto"});//,"left":left+"px"
 
 		$this.keyup(function(e){
 			var dat = $.trim($this.val());
@@ -159,4 +165,3 @@ $.fn.optionclear  = function (options,callback){
 	
 }
 })(jQuery)
-
