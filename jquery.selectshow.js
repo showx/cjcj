@@ -83,9 +83,18 @@
 			                		$(".dropdown dd ul a").each(function(i,data){
 			                			// tmp = $(this).children("span").text();
 			                			
-			                			txt = $(this).text();
-			                			if(txt.indexOf(v)>0 && tmpc==0)
+			                			// txt = $(this).text();  //.fliter(".value")
+			                			txt = $(this).html();
+			                			var re = /<span class="value">(.+)<\/span>/;
+			                			txt = txt.replace(re,"");
+			                			//test
+			                			// d(txt);
+			                			// d("====");
+			                			// d(v);
+			                			// d(tmpc);
+			                			if(txt.indexOf(v)>-1 && tmpc==0) //txt.indexOf(v)>0
 			                			{
+			                				$(this).css({'background-color':'#ffffff',"cursor":"mouse"})
 			                				// d(data);
 			                				tmpc = i;
 
@@ -95,6 +104,8 @@
 
 				                			$(".dropdown dd ul").scrollTop(t);
 
+			                			}else{
+			                				$(this).css({'background-color':'#C5C0B0',"cursor":"mouse"})
 			                			}
 			                			// d($(this));
 			                		})
@@ -153,3 +164,4 @@
 	}
 
 })(jQuery)
+
