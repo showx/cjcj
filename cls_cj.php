@@ -8,8 +8,9 @@ $cj->setStyleUrl("http://.com.cn");
  $cj->start();
 */
 /**
-* 采集类
-* Author:show
+* 副助采集类
+* todo:把第１版整合过来
+* Author:show(9448923@qq.com)
 */ 
 // echo '开始采集';
 error_reporting(E_ALL);
@@ -129,7 +130,7 @@ class btget{
 					//background:url的情况也有
 					preg_match_all('/[background-image|background]:url\((.*)?\)/isU',$data,$cssimage,PREG_PATTERN_ORDER);
 					$cssimage = array_unique($cssimage['1']);
-					var_dump($cssimage);
+					// var_dump($cssimage);
 					foreach($cssimage as $img)
 					{
 						$img = str_replace("../", "", $img,$count);
