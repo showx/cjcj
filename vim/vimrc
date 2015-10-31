@@ -1,0 +1,45 @@
+source /show/vim/bundles.vim
+"要设置配置文件的环境变量
+"runtime ftplugin/man.vim
+
+set encoding=utf-8
+set fenc=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb2312,gb18030,big5
+
+set bg=dark
+
+set showcmd
+set nojoinspaces
+set foldlevelstart=99
+set noswapfile
+if has('mouse')
+  set mouse=nv
+endif
+set number
+
+
+set rtp+=/show/vim/bundle/vundle/  
+call vundle#rc() 
+
+Bundle 'L9'  
+Bundle 'nerdtree'
+Bundle 'winmanager'
+Bundle 'tabular'
+Bundle 'vundle'
+Bundle 'matchit'
+Bundle 'OmniCppComplete'
+Bundle 'FuzzyFinder'
+Bundle 'minibufexplorerpp'
+
+
+map <C-x> :NERDTreeToggle
+
+
+Bundle 'minibufexpl.vim'
+let g:miniBufExplMapWindowNavVim = 1   
+let g:miniBufExplMapWindowNavArrows = 1   
+let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplModSelTarget = 1  
+let g:miniBufExplMoreThanOne=0
+map <C-z> :MBEbp<CR>
+map <C-a> :MBEbn<CR>
