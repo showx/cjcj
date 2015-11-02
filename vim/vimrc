@@ -1,12 +1,57 @@
+set g:showpath="/show/"
+
 source /show/vim/bundles.vim
 "要设置配置文件的环境变量
 "runtime ftplugin/man.vim
-
+"内部编码
 set encoding=utf-8
 set fenc=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb2312,gb18030,big5
-
+"背景色
 set bg=dark
+"中文帮助
+set helplang=cn
+"打开搜索高亮
+set hlsearch
+""忽略大小写
+set ignorecase
+"在查找时输入字符过程中就高亮显示匹配点。然后回车跳到该匹配点。
+set incsearch  
+""设置查找到文件尾部后折返开头或查找到开头后折返尾部。
+set wrapscan
+"设置字体
+if has("gui_running")
+      set guifont=Consolas:h9
+endif
+
+
+" 格式化高亮
+syntax on
+" 显示行号
+set nu
+" 括号匹配
+set showmatch
+"自动检测文件类型
+filetype plugin indent on 
+"在缩进和遇到 Tab 键时使用空格替代
+set expandtab
+"根据文件类型设置缩进格式
+au FileType html,python,vim,javascript setl shiftwidth=2
+au FileType html,python,vim,javascript setl tabstop=2
+au FileType java,php setl shiftwidth=4
+au FileType java,php setl tabstop=4
+" 启动vim时不要自动折叠代码
+set foldlevel=100  
+"自动对齐       
+set ai   
+"依据上面的对起格式
+set si  
+set smarttab
+set wrap
+set lbr
+set tw=0
+set foldmethod=syntax
+
 
 set showcmd
 set nojoinspaces
@@ -17,29 +62,82 @@ if has('mouse')
 endif
 set number
 
+"rtp即runtimepath
+"let $VIMRUNTIME = "/show/vim/runtime"
+set runtimepath+=/show/vim/runtime
 
 set rtp+=/show/vim/bundle/vundle/  
 call vundle#rc() 
 
+"主题
+"let macvim_skip_colorscheme = 1
+set guifont=LetterGothicMono:h18
+set bg=dark
+colorscheme murphy
+
 Bundle 'L9'  
 Bundle 'nerdtree'
 Bundle 'winmanager'
-Bundle 'tabular'
-Bundle 'vundle'
+Bundle 'tabular' "格式化工具 :Tab \=
+Bundle 'vundle' "插件管理 
 Bundle 'matchit'
 Bundle 'OmniCppComplete'
 Bundle 'FuzzyFinder'
 Bundle 'minibufexplorerpp'
+Bundle 'minibufexpl.vim'
+Bundle 'taglist'
+
+":BundleList              -列举列表(也就是.vimrc)中配置的所有插件  
+":BundleInstall          -安装列表中的全部插件  
+":BundleInstall!         -更新列表中的全部插件  
+":BundleSearch foo   -查找foo插件  
+":BundleSearch! foo  -刷新foo插件缓存  
+":BundleClean           -清除列表中没有的插件  
+":BundleClean!          -清除列表中没有的插件  
 
 
 map <C-x> :NERDTreeToggle
 
-
-Bundle 'minibufexpl.vim'
 let g:miniBufExplMapWindowNavVim = 1   
 let g:miniBufExplMapWindowNavArrows = 1   
 let g:miniBufExplMapCTabSwitchBufs = 1   
 let g:miniBufExplModSelTarget = 1  
 let g:miniBufExplMoreThanOne=0
-map <C-z> :MBEbp<CR>
-map <C-a> :MBEbn<CR>
+map <C-1> :MBEbp<CR>
+map <C-2> :MBEbn<CR>
+
+
+
+"设置nmap管理
+let g:winManagerWindowLayout = "NERDTree|TagList"
+nmap wm :WMToggle
+
+
+"配置taglist
+
+"let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_Ctags_Cmd="/usr/bin/ctags"
+
+let Tlist_Show_One_File=1
+
+let Tlist_Exit_OnlyWindow=1
+
+
+nmap <d-i> :echo "cmd-i was pressed"<CR>
+nmap <d-I> :echo "cmd-I was pressed"<CR>
+" these do nothing:
+nmap <m-i> :echo "alt-i was pressed"<CR>
+nmap <m-I> :echo "alt-I was pressed"<CR>
+nmap <d-a-i> :echo "cmd-alt-i was pressed"<CR>
+nmap <D-S-i> :echo "cmd-shift-i was pressed"<CR>
+
+nmap <S-D-'> :echo "cmd-shift-' was pressed"<CR>
+nmap <A-D-'> :echo "cmd-alt-' was pressed"<CR>
+nmap <A-C-'> :echo "cmd-alt-' was pressed"<CR>
+
+map <D-}> :echo "cmd-} was pressed"<CR>
+map <D-S-]> :echo "cmd-shift-] was pressed"<CR>
+map <D-S-[> :echo "cmd-shift-[ was pressed"<CR>
+
+
+
