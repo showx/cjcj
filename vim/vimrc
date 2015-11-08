@@ -1,4 +1,13 @@
+"出厂设置 
+"vim -u NONE -N
 "set g:showpath="/show/"
+"去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限 
+set nocompatible
+"backspace有几种工作方式，默认是vi兼容的。对新手来说很不习惯。对老vi
+"不那么熟悉的人也都挺困扰的。
+set backspace=indent,eol,start
+"十进制模式 避免 007+001=010
+set nrformats=
 
 source /show/vim/bundles.vim
 "要设置配置文件的环境变量
@@ -16,7 +25,7 @@ set hlsearch
 ""忽略大小写
 set ignorecase
 "在查找时输入字符过程中就高亮显示匹配点。然后回车跳到该匹配点。
-set incsearch  
+set incsearch
 ""设置查找到文件尾部后折返开头或查找到开头后折返尾部。
 set wrapscan
 "设置字体
@@ -52,6 +61,9 @@ set lbr
 set tw=0
 set foldmethod=syntax
 
+"grepprg="grep -n $* /dev/null"
+"grepformat-"%f:%l:%m,%f:%l%m,%f  %l%m"
+
 
 set showcmd
 set nojoinspaces
@@ -67,6 +79,9 @@ set number
 set runtimepath+=/show/vim/runtime
 
 set rtp+=/show/vim/bundle/vundle/  
+
+"$HOME/.vim/bundle
+let vundle#bundle_dir = expand('/show/vim/bundle', 1)
 call vundle#rc() 
 
 "主题
@@ -88,6 +103,9 @@ Bundle 'FuzzyFinder'
 Bundle 'minibufexplorerpp'
 Bundle 'minibufexpl.vim'
 Bundle 'taglist'
+"ack命令插件
+Bundle 'ack'  
+
 
 ":BundleList              -列举列表(也就是.vimrc)中配置的所有插件  
 ":BundleInstall          -安装列表中的全部插件  
@@ -116,13 +134,12 @@ nmap wm :WMToggle
 
 
 "配置taglist
-
 "let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Ctags_Cmd="/usr/bin/ctags"
-
 let Tlist_Show_One_File=1
-
 let Tlist_Exit_OnlyWindow=1
+"更新cats
+nnoremap <f5> :!ctags -R<CR>
 
 
 nmap <d-i> :echo "cmd-i was pressed"<CR>
@@ -141,5 +158,28 @@ map <D-}> :echo "cmd-} was pressed"<CR>
 map <D-S-]> :echo "cmd-shift-] was pressed"<CR>
 map <D-S-[> :echo "cmd-shift-[ was pressed"<CR>
 
+"EX模式 例：:'<,'>p    :2p  :号为EX命令
 
 
+"养成使用hjkl的习惯，禁用up down left right键位
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+
+"小笔记
+" . 键就重复操作  , 返回上操作
+" 'm包含位置标记m的行   '< 高亮选区的fhjn始行  '>结束行    %整个文件(:1,$的简写)
+" :t  :m  复制或移动行
+" :shell 可以运行shell
+"c-w 切换到相应窗口里
+
+"单词相关键位  w b e ge
+
+"v模式下，范围选取 a i选取   a)一对圆括号  i)圆括号内部
+
+" 调定自动补全
+" set complete-=i
+" set complete+=k
+" C-p C-n 自动补全
