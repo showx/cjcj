@@ -1,5 +1,4 @@
 # cjcj
-增加vim库
 <table>
     <tr>
          <td>
@@ -7,3 +6,8 @@
          </td>
     </tr>
 </table>
+<ol>
+<li>js下图框库</li>
+<li>图像处理类</li>
+<li>vim使用库</li>
+</ol>
