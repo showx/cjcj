@@ -42,29 +42,30 @@
 			            }
 			            $(this).after("<div id='target"+settings.sid+"' style='display:inline-block;height:15px;width:"+settings.width+"'></div>");
 			            source.hide();  //隐藏原来的
-			            $("#target"+settings.sid).append('<dl id="target" class="dropdown"></dl>');
+			            $("#target"+settings.sid).append('<dl id="targets'+settings.sid+'" class="dropdown"></dl>');
 			            var w = parseInt(settings.width)-8+"px";
-			            $("#target").append('<dt><input style="width:'+w+'" type="text" autoComplete="Off" name="x" value="' + selected.text() + ' " />' +
+			            $("#targets"+settings.sid).append('<dt><input style="width:'+w+'" type="text" autoComplete="Off" id="x'+settings.sid+'" name="x" value="' + selected.text() + ' " />' +
 			                '<span class="value">' + selected.val() + 
 			                '</span></dt>')
-			            $("#target").append('<dd><ul></ul></dd>')
+			            $("#targets"+settings.sid).append('<dd><ul></ul></dd>')
 
 			            options.each(function(){
-			                $("#target dd ul").append('<li><a href="#">' + 
+			                $("#target"+settings.sid+" dd ul").append('<li><a href="#">' + 
 			                    $(this).text() + '<span class="value">' + 
 			                    $(this).val() + '</span></a></li>');
 			            });
-
-			            $(".dropdown dd input").keyup(function(){
-
+                  //普通的录入 录入的值也要查询
+			            $("#x"+settings.sid).keyup(function(){
+                    v = $(this).val();
+                    source.val(v);
 			            })
 			            //双击出现下拉
-			           $(".dropdown dt input").dblclick(function() {
-			                $(".dropdown dd ul").toggle();
+			           $("#x"+settings.sid).dblclick(function() {
+			                $("#targets"+settings.sid+" dd ul").toggle(); //.dropdown dd input
 			                // $(this).focus(function(){
 			                // 	$(this).val("");
 			                // })
-			                if($(".dropdown dd ul").is(":hidden"))
+			                if($("#targets"+settings.sid+" dd ul").is(":hidden"))
 			                {
 			                	$(this).unbind("keyup");
 			                }else{
@@ -80,7 +81,7 @@
 		                			o.margin = true;
 		                			o.border = true;
 
-			                		$(".dropdown dd ul a").each(function(i,data){
+			                		$("#targets"+settings.sid+" dd ul a").each(function(i,data){
 			                			// tmp = $(this).children("span").text();
 			                			
 			                			// txt = $(this).text();  //.fliter(".value")
@@ -99,10 +100,10 @@
 			                				tmpc = i;
 
 				                			scro = $(this).parent().offset(); //scrollTop scrollLeft
-				                			var s = $(".dropdown dd ul").scrollTop();
+				                			var s = $("#targets"+settings.sid+" dd ul").scrollTop();
 				                			var t = scro.top + s - 43;
 
-				                			$(".dropdown dd ul").scrollTop(t);
+				                			$("#targets"+settings.sid+" dd ul").scrollTop(t);
 
 			                			}else{
 			                				$(this).css({'background-color':'#C5C0B0',"cursor":"mouse"})
@@ -113,14 +114,14 @@
 
 			                }
 			            });
-			            $(".dropdown dd ul li a").click(function() {
+			            $("#targets"+settings.sid+" dd ul li a").click(function() {
 			            	 tt = $(this).children("span");
 			            	 tt.remove();
 			                var text = $(this).html();
 			                $(this).append(tt);
 			                // d(text);
-			                $(".dropdown dt input").val(text);
-			                $(".dropdown dd ul").hide();
+			                $("#targets"+settings.sid+" dt input").val(text);
+			                $("#targets"+settings.sid+" dd ul").hide();
 
 			                var source = $("#"+settings.sid);
 			                source.val($(this).find("span.value").html())
@@ -128,7 +129,7 @@
 			            $(document).bind('click', function(e) {
 			                    var $clicked = $(e.target);
 			                    if (! $clicked.parents().hasClass("dropdown"))
-			                        $(".dropdown dd ul").hide();
+			                        $("#targets"+settings.sid+" dd ul").hide();
 			                });
 				
 
@@ -164,4 +165,3 @@
 	}
 
 })(jQuery)
-
