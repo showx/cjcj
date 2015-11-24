@@ -11,3 +11,22 @@
 <li>图像处理类</li>
 <li>vim使用库</li>
 </ol>
+<pre><code>&lt;div class="footer"&gt;
+    &amp;copy; 2015 show Corporation
+    &lt;/div&gt;
+    </code></pre>
+markdown characters:
+<code>
+\   backslash
+`   backtick
+*   asterisk
+_   underscore
+{}  curly braces
+[]  square brackets
+()  parentheses
+#   hash mark
++   plus sign
+-   minus sign (hyphen)
+.   dot
+!   exclamation mark
+</code>
