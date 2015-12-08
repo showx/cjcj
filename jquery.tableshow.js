@@ -51,30 +51,45 @@
         {
                 for(i=0;i<obj.rows.length-1;i++)
                 {
-                    obj.rows[i].cells[cell].style.display  =  "block";
+                    //block可能占据一行
+                    obj.rows[i].cells[cell].style.display  =  "table-cell";
                 }
         }
-        return this.each(function(){
-          $(this).click(function(){
-              //总列数
-              cells = obj.rows.item(0).cells.length; 
-              hinput = $("#"+settings.hhide).val();
-              //值为空不处理
-              if(hinput =='0' || hinput == '')
-              {
-                // return '';
-              }
-              //隐藏所有，显示要用的字段就可以了
-              for(j=0;j<cells;j++)
-              {
-                hide(j);
-              }
-              //计算要显示的列并显示 
-              adata = hinput.split(",");
-              adata.forEach(function (item, index, array) {
-                show(item);
-              });
 
+        //改变table显示
+        function change()
+        {
+          //总列数
+          cells = obj.rows.item(0).cells.length; 
+          hinput = $("#"+settings.hhide).val();
+          //隐藏所有，显示要用的字段就可以了
+          for(j=0;j<cells;j++)
+          {
+            hide(j);
+          }
+          if(hinput =='0' || hinput == '')
+          {
+            //值为空不处理
+            // return '';
+            for(j=0;j<cells;j++)
+            {
+              show(j);
+            }
+          }else{
+            //计算要显示的列并显示 
+            adata = hinput.split(",");
+            adata.forEach(function (item, index, array) {
+              show(item);
+            });
+          }
+
+        }
+
+        return this.each(function(){
+             //刚加载也改变一下
+             change();
+          $(this).click(function(){
+             change(); 
           });  
         });
 
