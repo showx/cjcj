@@ -43,7 +43,10 @@
         {
                 for(i=0;i<obj.rows.length-1;i++)
                 {
-                    obj.rows[i].cells[cell].style.display  =  "none";
+                    if(obj.rows[i].cells[cell])
+                    {
+                      obj.rows[i].cells[cell].style.display  =  "none";
+                    }
                 }
         }
         //显列
@@ -52,7 +55,10 @@
                 for(i=0;i<obj.rows.length-1;i++)
                 {
                     //block可能占据一行
-                    obj.rows[i].cells[cell].style.display  =  "table-cell";
+                    if(obj.rows[i].cells[cell])
+                    {
+                      obj.rows[i].cells[cell].style.display  =  "table-cell";
+                    }
                 }
         }
 
