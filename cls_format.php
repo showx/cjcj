@@ -4,7 +4,7 @@
  * Author:show(9448923@qq.com)
  * Date:2016.1.11
  */
-cls_format
+class cls_format
 {
     /**
      * json to array
@@ -16,7 +16,7 @@ cls_format
         echo "array(\n";
         foreach($a as $key=>$val)
         {
-               self::garr($val,"\$arr[$key]"); 
+               self::garr($val,"\$arr['$key']"); 
         }
        echo ")";
 
@@ -37,7 +37,7 @@ cls_format
         {
             foreach($arr as $k=>$v)
             {
-              $kk = $e."[".$k."]";
+              $kk = $e."['".$k."']";
               self::xarr($v,$kk);
             }
         }else{
