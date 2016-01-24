@@ -44,6 +44,25 @@ class cls_format
             echo $e."=\"".$arr."\";\n";
         }
     }  
+    /**
+     * 一行输出数组
+     */
+    public function harr($arr)
+    {
+        if(is_array($arr))
+        {
+            echo "array(";
+            foreach($arr as $k=>$v)
+            {
+                if(!is_array($v))
+                {
+                    echo "\"{$k}\"=>\"{$v}\",";
+                }
+                self::harr($v);
+            } 
+            echo "),\n";
+        }
+    }
     /*
      * json to array
      */
