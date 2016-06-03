@@ -1,6 +1,6 @@
 "出厂设置 
 "vim -u NONE -N
-"set g:showpath="/show/"
+"set g:showpath="/show/"   
 "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限 
 set nocompatible
 "backspace有几种工作方式，默认是vi兼容的。对新手来说很不习惯。对老vi
@@ -33,6 +33,9 @@ set wrapscan
 if has("gui_running")
       set guifont=Consolas:h9
 endif
+
+
+" >. V模式向左tab
 
 
 " 格式化高亮 on enable
@@ -88,58 +91,90 @@ set number
 "let $VIMRUNTIME = "/show/vim/runtime"
 set runtimepath+=/show/vim/runtime
 set rtp+=/show/vim/bundle/vundle/  
+set rtp+=/show/vim/bundle
+
 
 "$HOME/.vim/bundle
-let vundle#bundle_dir = expand('/show/vim/bundle', 1)
-call vundle#rc() 
+"let vundle#bundle_dir = expand('/show/vim/bundle', 1)
+"let g:vundle#bundle_dir = expand('/show/vim/bundle', 1)
+
+call vundle#rc('/show/vim/bundle') 
 
 "主题
 "let macvim_skip_colorscheme = 1
 set guifont=LetterGothicMono:h18
 set bg=dark
 "colorscheme murphy
-colorscheme monokai
+"colorscheme monokai
 
-source /show/vim/bundle/php-doc.vim
+"source /show/vim/bundle/php-doc.vim
 
 
-Bundle 'L9'  
-Bundle 'nerdtree'
-Bundle 'winmanager'
-"格式化工具 :Tab \=
-Bundle 'tabular'
+"Bundle 'gmarik/vundle'
+Bundle 'vim-scripts/L9'  
+Bundle 'scrooloose/nerdtree'
+Bundle 'vim-scripts/winmanager'
+Bundle 'godlygeek/tabular'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/OmniCppComplete'
+Bundle 'vim-scripts/FuzzyFinder'
+Bundle 'vim-scripts/tag,list.vim'
+"搜索相关
+Bundle 'mileszs/ack.vim'
+Bundle 'vim-scripts/ag.vim'
+Bundle 'dyng/ctrlsf.vim'
+"end 搜索相关
+Bundle 'vim-scripts/php-doc'
+Bundle 'vim-scripts/minibufexplorerpp'
+"文件tab
+"minibufexplorer  :bn下一个 :bp上一个 C-w,h j k l    向"左,下,上,右"切换窗口.  c-tab c-s-tab
+" b<n> 第几个 bd关闭
+Bundle 'vim-scripts/minibufexpl.vim'
+Bundle 'vim-scripts/project.vim'
+Bundle 'tristen/vim-sparkup'
+Bundle 'mattn/emmet-vim'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'tpope/vim-surround'
+
+Bundle 'tpope/vim-rails.git'
+
+
+
+
+"Bundle 'L9'  
+"Bundle 'nerdtree'
+"Bundle 'winmanager'
+"格式化工具 :Tab \=  :TAb \.
+"Bundle 'tabular'
 "插件管理  
-Bundle 'vundle' 
-Bundle 'matchit'
-Bundle 'OmniCppComplete'
-Bundle 'FuzzyFinder'
-Bundle 'minibufexplorerpp'
-Bundle 'minibufexpl.vim'
-Bundle 'taglist'
+"Bundle 'vundle' 
+"Bundle 'matchit'
+"Bundle 'OmniCppComplete'
+"Bundle 'FuzzyFinder'
+"Bundle 'minibufexplorerpp'
+"Bundle 'minibufexpl.vim'
+"Bundle 'taglist'
 "ack命令插件
-Bundle 'ack'  
+"Bundle 'ack'  
 "项目管理插件
-Bundle 'project'
-Bundle 'sparkup'
-Bundle 'emmet-vim'
+"Bundle 'project'
+"Bundle 'sparkup'
+"Bundle 'emmet-vim'
 "zendcoding html:4s  "Ctrl"再按下 “y” 和“，” "
-Bundle 'neocomplcache'
-Bundle 'php-doc.vim'
-" ysiw" 对文字两边加双引号  cs"'改变双引号为单引号  ds删除
-Bundle 'surround'
+"Bundle 'neocomplcache'
+"Bundle 'php-doc.vim'
+" ysiw" 对文字两边加双引号  cs"'改变双引号为单引号  ds删除  vee选择好字之后   S"选中的文本加"
+"Bundle 'surround'
 
 if &term=="xterm"
   set t_Co=8
   set t_Sb=^[[4%dm
   set t_Sf=^[[3%dm
 endif
-
 let g:neocomplcache_enable_at_startup = 1
-
 inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i
 nnoremap <C-P> :call PhpDocSingle()<CR>
 vnoremap <C-P> :call PhpDocRange()<CR> 
-
 
 "注释
 "<c-_><c-_>   :: :TComment
@@ -165,6 +200,22 @@ Bundle 'tComment'
 map <C-x> :NERDTreeToggle
 
 
+
+
+:nn <M-1> 1gt
+:nn <M-2> 2gt
+:nn <M-3> 3gt
+:nn <M-4> 4gt
+:nn <M-5> 5gt
+:nn <M-6> 6gt
+:nn <M-7> 7gt
+:nn <M-8> 8gt
+:nn <M-9> 9gt
+:nn <M-0> :tablast<CR>
+
+"set tags=tags;
+"set autochdir
+
 "<Tab>	向前循环切换到每个buffer名上
 "<S-Tab>	向后循环切换到每个buffer名上
 "<Enter>	在打开光标所在的buffer
@@ -173,6 +224,7 @@ let g:miniBufExplMapWindowNavVim = 1
 "<C-h,j,k,l>切换到上下左右的窗口中去
 let g:miniBufExplMapWindowNavArrows = 1   
 let g:miniBufExplMapCTabSwitchBufs = 1   
+let g:miniBufExplMapCTabSwitchWindows = 1  
 "<C-Tab>	向前循环切换到每个buffer上,并在但前窗口打开
 "<C-S-Tab>	向后循环切换到每个buffer上,并在但前窗口打开
 let g:miniBufExplModSelTarget = 1  
@@ -185,13 +237,17 @@ map <C-2> :MBEbn<CR>
 "let Tlist_Ctags_Cmd="/usr/bin/ctags"
 "/usr/local/Cellar/ctags/5.8_1/bin/ctags -R
 
-let Tlist_Ctags_Cmd="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
+"let Tlist_Ctags_Cmd="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Right_Window=1
 "TlistOpen 启动就开启
 let Tlist_Auto_Open=1
 
+
+"单击打开目录
+let NERDTreeMouseMode = 3
 
 "设置nmap管理
 let g:winManagerWindowLayout = "NERDTree" 
@@ -214,9 +270,14 @@ autocmd bufenter * if (winnr("$") == 2 && exists("b:NERDTreeType") &&b:NERDTreeT
 
 "更新cats
 "nnoremap <f5> :!ctags -R<CR>
-nnoremap <f5> :!/usr/local/Cellar/ctags/5.8_1/bin/ctags -R<CR>
+"nnoremap <f5> :!/usr/local/Cellar/ctags/5.8_1/bin/ctags -R<CR>
+nnoremap <f5> :!/usr/local/bin/ctags -R<CR>
+
 "  ctrl+]眺转  跳ctrl+T 转本来的函数  
 
+" brew install Ack
+let g:ackprg = "/usr/local/bin/Ack -s -H --nocolor --nogroup --column"
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 nmap <d-i> :echo "cmd-i was pressed"<CR>
 nmap <d-I> :echo "cmd-I was pressed"<CR>
@@ -243,6 +304,12 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+"缓冲区快捷键
+noremap <silent> [b :bprevious<CR>
+noremap <silent> ]b :bnext<CR>
+noremap <silent> [B :bfirst<CR>
+noremap <silent> ]B :blast<CR>
+
 
 "小笔记
 " . 键就重复操作  , 返回上操作
@@ -261,14 +328,31 @@ noremap <Right> <Nop>
 " set complete-=i
 " set complete+=k
 " C-p C-n 自动补全
-
+" n下一下 N上一个
+h
 set modifiable
 set write
 
 " x删除后面一个单词
-" /搜索下一个 ?搜索上一下   n下一个 #号是上一个
+"c修改  r替换
+" /搜索下一个 ?搜索上一下   n下一个 #号是上一个 大写N下一个
 "右下角显示坐标
 set ruler
 
 
-"~/.vim/syntax/php.vim 自己加的2008 php解释去掉，在mccvim下不好用
+"~/.vim/syntax/php.vim 自己加的2008 php解释去掉，在macvim下不好用
+
+"按v下启用  vi) va) 选择括号内的内容   选择括号和括号内的内容
+
+"自动位置标记    mm设置标记 `m回到标记 ``上次跳转动作之前的位置   `.上次修改的地方  `^上次插入的地方 b
+
+"括号内之间的跳转 gt
+
+"%h %l 函数范围或插号范围的跳转  闭合标签
+
+"水平分屏:sp <c-w>s  垂直分屏:vsp <c-w>v
+" >右缩进  <左缩进
+" :'<,'>  '<,'>代表高亮 部分 重复上次命令 @:即可
+" {N}gt   gt下一标签 gT上一标签
+set pastetoggle=<f5>
+"录制宏 q  @a  @@
