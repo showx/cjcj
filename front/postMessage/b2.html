@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="format-detection" content="address=no;email=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <style>
+        input {
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <p>我是iframe页面</p>
+    <div>发送的信息是：<input id="iframe" type="text"><input id="sendBtn" type="button" value="发送"></div>
+    <script>
+        // 点击按钮后向父页面发送数据
+        document.getElementById('sendBtn').onclick = function() {
+            // window.parent代表父页面
+            window.parent.postMessage(document.getElementById("iframe").value, '*');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="address=no;email=no" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        iframe {
+            width: 100%;
+            border: 1px solid #000;
+            border-width: 1px 0;
+            margin-top: 20px;
+        }
+        input {
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <p>我是父页面</p>
+    <div>发送的信息是：<input id="iframe" type="text"><input id="sendBtn" type="button" value="发送"></div>
+    <iframe src="/b.html" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    <script>
+        // 点击按钮后向iframe页面发送数据
+        document.getElementById('sendBtn').onclick = function() {
+            // window.frames[0]代表第一个iframe页面
+            window.frames[0].postMessage(document.getElementById("iframe").value, '*');
+        }
+    </script>
+</body>
+</html>
